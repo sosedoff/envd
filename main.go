@@ -28,9 +28,9 @@ func main() {
 		os.Exit(1)
 	}
 
-	fmt.Printf("envd v%s\n\n", VERSION)
-	fmt.Println("Services detected:", len(services))
-	fmt.Println("Starting server on port", options.Port)
+	fmt.Printf("envd v%s\n", VERSION)
+	fmt.Println("services detected:", len(services))
+	fmt.Println("starting server on port", options.Port)
 
 	startServer()
 }
