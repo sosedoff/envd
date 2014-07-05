@@ -3,3 +3,6 @@ deps:
 
 build:
 	go build
+
+buildall:
+	gox
