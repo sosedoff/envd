@@ -5,6 +5,10 @@ import (
 	"os"
 )
 
+const (
+	VERSION = "0.1.0"
+)
+
 var options struct {
 	Path string
 	Port int
@@ -24,6 +28,7 @@ func main() {
 		os.Exit(1)
 	}
 
+	fmt.Printf("envd v%s\n\n", VERSION)
 	fmt.Println("Services detected:", len(services))
 	fmt.Println("Starting server on port", options.Port)
 
