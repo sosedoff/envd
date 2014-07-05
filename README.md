@@ -50,7 +50,7 @@ Usage of ./envd:
   -p=3050: Port to listen on
 ```
 
-## Endpints
+## Endpoints
 
 Fetch all available services:
 
