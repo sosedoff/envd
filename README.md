@@ -42,15 +42,35 @@ S3_BUCKET=foobar
 
 ## Usage
 
-Endpoints:
+Options:
+
+```
+Usage of ./envd:
+  -c="": Path to config directory
+  -p=3050: Port to listen on
+```
+
+## Endpints
+
+Fetch all available services:
 
 ```
 GET /
+```
+
+Fetch service environments:
+
+```
 GET /:service
+```
+
+Fetch service environment variables:
+
+```
 GET /:service/:environment
 ```
 
-To dynamically reload configs:
+Reload configuration files:
 
 ```
 POST /reload
