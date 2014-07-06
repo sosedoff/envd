@@ -51,6 +51,23 @@ Usage of ./envd:
   -t="": Authentication token
 ```
 
+Start server:
+
+```
+envd -c ./examples -t foo
+```
+
+Make requests with `curl`:
+
+``` bash
+# Without authentication
+curl http://localhost:3050/myapp/production
+
+# With authentication
+curl -f http://localhost:3050/myapp/production?token=foo
+curl -f http://localhost:3050/myapp/production -H "Token: foo"
+```
+
 ## Endpoints
 
 Fetch all available services:
