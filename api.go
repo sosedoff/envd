@@ -13,7 +13,9 @@ func getClientToken(c *gin.Context) string {
 
 	// Try to fetch from url param if blank
 	if token == "" {
-		token = c.Req.URL.Query()["token"][0]
+		if len(c.Req.URL.Query()["token"]) > 0 {
+			token = c.Req.URL.Query()["token"][0]
+		}
 	}
 
 	return token
