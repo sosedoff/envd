@@ -8,5 +8,5 @@ buildall:
 	gox
 
 clean:
-	rm -f ./env
-	rm -f ./env_*
+	rm -f ./envd
+	rm -f ./envd_*
