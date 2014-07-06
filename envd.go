@@ -48,7 +48,6 @@ func main() {
 	fmt.Printf("envd v%s\n", VERSION)
 	fmt.Println("config path:", options.Path)
 	fmt.Println("services detected:", len(services))
-	fmt.Println("starting server on port", options.Port)
 
 	startServer()
 }
