@@ -2,6 +2,8 @@
 
 Serves application environment variables over HTTP from a config directory.
 
+[![Build Status](https://travis-ci.org/sosedoff/envd.svg?branch=master)](https://travis-ci.org/sosedoff/envd)
+
 ## Overview
 
 Original idea was to fetch application environment variables for `.env` file from the network.
