@@ -60,6 +60,9 @@ func renderReloadServices(c *gin.Context) {
 func startServer() {
 	api := gin.Default()
 
+	api.Use(gin.Logger())
+	api.Use(gin.Recovery())
+
 	api.GET("/", renderAvailableServices)
 	api.GET("/:service", renderServiceEnvironments)
 	api.GET("/:service/:env", renderServiceEnvironment)
