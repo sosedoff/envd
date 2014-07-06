@@ -11,8 +11,10 @@ const (
 )
 
 var options struct {
-	Path string
-	Port int
+	Path  string
+	Port  int
+	Token string
+	Auth  bool
 }
 
 var services []Service
@@ -20,10 +22,19 @@ var services []Service
 func main() {
 	flag.StringVar(&options.Path, "c", "", "Path to config directory")
 	flag.IntVar(&options.Port, "p", 3050, "Port to listen on")
+	flag.StringVar(&options.Token, "t", "", "Authentication token")
+
 	flag.Parse()
 
 	if options.Path == "" {
 		options.Path = "./config"
+	}
+
+	// Do not require authentication if token is not set
+	if options.Token == "" {
+		options.Auth = false
+	} else {
+		options.Auth = true
 	}
 
 	var err error

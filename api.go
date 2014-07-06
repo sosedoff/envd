@@ -6,6 +6,29 @@ import (
 	"strings"
 )
 
+// Returns client authentication token from header or url params
+func getClientToken(c *gin.Context) string {
+	// Try fetching auth token from headers first
+	token := c.Req.Header.Get("Token")
+
+	// Try to fetch from url param if blank
+	if token == "" {
+		token = c.Req.URL.Query()["token"][0]
+	}
+
+	return token
+}
+
+func RequireAuthToken() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		token := getClientToken(c)
+
+		if token != options.Token {
+			c.Abort(401)
+		}
+	}
+}
+
 func renderAvailableServices(c *gin.Context) {
 	names := []string{}
 
@@ -60,10 +83,18 @@ func renderReloadServices(c *gin.Context) {
 func startServer() {
 	api := gin.Default()
 
+	if options.Auth {
+		fmt.Println("authentication enabled")
+		api.Use(RequireAuthToken())
+	} else {
+		fmt.Println("authentication disabled")
+	}
+
 	api.GET("/", renderAvailableServices)
 	api.GET("/:service", renderServiceEnvironments)
 	api.GET("/:service/:env", renderServiceEnvironment)
 	api.POST("/reload", renderReloadServices)
 
+	fmt.Println("starting server on port", options.Port)
 	api.Run(fmt.Sprintf(":%d", options.Port))
 }
