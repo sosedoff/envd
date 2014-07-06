@@ -27,7 +27,7 @@ myapp (dir)
 Request production environment of myapp with curl:
 
 ```
-curl http://envdhost:5000/myapp/production
+curl http://localhost:3050/myapp/production
 ```
 
 Example output:
