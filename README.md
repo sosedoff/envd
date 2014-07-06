@@ -103,6 +103,14 @@ make deps
 make build
 ```
 
+## Test
+
+Execute test suite with command:
+
+```
+make test
+```
+
 ## License
 
 The MIT License (MIT)

@@ -43,7 +43,7 @@ func main() {
 	}
 
 	var err error
-	services, err = readServices()
+	services, err = readServices(options.Path)
 
 	if err != nil {
 		fmt.Println("Error:", err.Error())

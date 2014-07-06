@@ -69,7 +69,7 @@ func renderServiceEnvironment(c *gin.Context) {
 }
 
 func renderReloadServices(c *gin.Context) {
-	new_services, err := readServices()
+	new_services, err := readServices(options.Path)
 
 	if err != nil {
 		c.String(400, err.Error()+"\n")

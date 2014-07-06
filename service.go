@@ -19,15 +19,15 @@ func (service Service) EnvironmentNames() []string {
 	return names
 }
 
-func readServices() (result []Service, err error) {
-	dirs, err := getDirs(options.Path)
+func readServices(path string) (result []Service, err error) {
+	dirs, err := getDirs(path)
 
 	if err != nil {
 		return
 	}
 
 	for _, name := range dirs {
-		dir := fmt.Sprintf("%s/%s", options.Path, name)
+		dir := fmt.Sprintf("%s/%s", path, name)
 		service := Service{Name: name, Environments: readEnvironments(dir)}
 
 		result = append(result, service)
