@@ -97,6 +97,8 @@ func startServer() {
 	api.GET("/:service/:env", renderServiceEnvironment)
 	api.POST("/reload", renderReloadServices)
 
-	fmt.Println("starting server on port", options.Port)
-	api.Run(fmt.Sprintf(":%d", options.Port))
+	host := fmt.Sprintf("%s:%d", options.Host, options.Port)
+
+	fmt.Println("starting server on", host)
+	api.Run(host)
 }

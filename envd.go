@@ -12,6 +12,7 @@ const (
 
 var options struct {
 	Path  string
+	Host  string
 	Port  int
 	Token string
 	Auth  bool
@@ -21,6 +22,7 @@ var services []Service
 
 func main() {
 	flag.StringVar(&options.Path, "c", "", "Path to config directory")
+	flag.StringVar(&options.Host, "h", "0.0.0.0", "Host to bind to")
 	flag.IntVar(&options.Port, "p", 3050, "Port to listen on")
 	flag.StringVar(&options.Token, "t", "", "Authentication token")
 

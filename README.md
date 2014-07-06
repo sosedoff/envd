@@ -49,6 +49,7 @@ Options:
 ```
 Usage of ./envd:
   -c="": Path to config directory
+  -h="0.0.0.0": Host to bind to
   -p=3050: Port to listen on
   -t="": Authentication token
 ```
