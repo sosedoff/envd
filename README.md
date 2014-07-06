@@ -48,6 +48,7 @@ Options:
 Usage of ./envd:
   -c="": Path to config directory
   -p=3050: Port to listen on
+  -t="": Authentication token
 ```
 
 ## Endpoints
