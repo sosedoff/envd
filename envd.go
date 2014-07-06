@@ -30,6 +30,11 @@ func main() {
 		options.Path = "./config"
 	}
 
+	// Load token from environment variable if not set
+	if options.Token == "" {
+		options.Token = os.Getenv("TOKEN")
+	}
+
 	// Do not require authentication if token is not set
 	if options.Token == "" {
 		options.Auth = false
