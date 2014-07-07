@@ -71,7 +71,7 @@ curl -f http://localhost:3050/myapp/production?token=foo
 curl -f http://localhost:3050/myapp/production -H "Token: foo"
 ```
 
-## Endpoints
+## API
 
 Fetch all available services:
 
@@ -97,13 +97,19 @@ Reload configuration files:
 POST /reload
 ```
 
-## Compile
+## Build
 
 To compile application from source execute:
 
 ```
 make deps
 make build
+```
+
+To build for cross-platform, execute:
+
+```
+make buildapp
 ```
 
 ## Test
