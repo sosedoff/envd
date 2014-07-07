@@ -20,7 +20,7 @@ var options struct {
 
 var services []Service
 
-func main() {
+func initOptions() {
 	flag.StringVar(&options.Path, "c", "", "Path to config directory")
 	flag.StringVar(&options.Host, "h", "0.0.0.0", "Host to bind to")
 	flag.IntVar(&options.Port, "p", 3050, "Port to listen on")
@@ -43,6 +43,10 @@ func main() {
 	} else {
 		options.Auth = true
 	}
+}
+
+func main() {
+	initOptions()
 
 	var err error
 	services, err = readServices(options.Path)
