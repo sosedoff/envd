@@ -4,6 +4,8 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"os/signal"
+	"syscall"
 )
 
 const (
@@ -54,8 +56,31 @@ func initOptions() {
 	}
 }
 
+func reloadServices() {
+	newServices, err := readServices(options.Path)
+
+	if err != nil {
+		return
+	}
+
+	services = newServices
+}
+
+func setupReload() {
+	c := make(chan os.Signal, 1)
+	signal.Notify(c, syscall.SIGHUP)
+
+	go func() {
+		for sig := range c {
+			fmt.Println("Reloading configuration...", sig)
+			reloadServices()
+		}
+	}()
+}
+
 func main() {
 	initOptions()
+	setupReload()
 
 	var err error
 	services, err = readServices(options.Path)
