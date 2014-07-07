@@ -30,6 +30,7 @@ func Test_readEnvironments(t *testing.T) {
 	assert.Equal(t, envs[0].Name, "production")
 	assert.Equal(t, len(envs[0].Keys), 4)
 	assert.Equal(t, len(envs[0].Hosts), 3)
+	assert.Equal(t, envs[0].Hosts, []string{"192.168.1.1", "192.168.1.2", "192.168.1.3"})
 	assert.Equal(t, envs[0].Token, "sampletoken")
 
 	assert.Equal(t, envs[1].Name, "staging")
