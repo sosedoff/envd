@@ -2,11 +2,25 @@ package main
 
 import (
 	"io/ioutil"
+	"os"
 )
 
+var skipFiles = [...]string{
+	".DS_Store",
+	".gitkeep",
+	".gitignore",
+}
+
+func fileExists(path string) bool {
+	_, err := os.Stat(path)
+	return err == nil
+}
+
 func isJunkFile(name string) bool {
-	if name == ".DS_Store" {
-		return true
+	for _, file := range skipFiles {
+		if file == name {
+			return true
+		}
 	}
 
 	return false

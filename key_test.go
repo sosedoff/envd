@@ -26,6 +26,6 @@ func Test_readKeys(t *testing.T) {
 }
 
 func Test_readKeysEmpty(t *testing.T) {
-	keys := readKeys("./examples/myapp")
+	keys := readKeys("./tests/app/development")
 	assert.Equal(t, len(keys), 0)
 }

@@ -7,7 +7,14 @@ import (
 
 func Test_isJunkFile(t *testing.T) {
 	assert.Equal(t, isJunkFile(".DS_Store"), true)
+	assert.Equal(t, isJunkFile(".gitkeep"), true)
+	assert.Equal(t, isJunkFile(".gitignore"), true)
 	assert.Equal(t, isJunkFile("file"), false)
+}
+
+func Test_fileExists(t *testing.T) {
+	assert.Equal(t, fileExists("/tmp"), true)
+	assert.Equal(t, fileExists("/tmp/foobar"), false)
 }
 
 func Test_getDirs(t *testing.T) {
@@ -37,14 +44,14 @@ func Test_getDirFiles(t *testing.T) {
 }
 
 func Test_getDirFilesEmpty(t *testing.T) {
-	files, err := getDirFiles("./examples/myapp")
+	files, err := getDirFiles("./tests/empty")
 
 	assert.Equal(t, err, nil)
 	assert.Equal(t, len(files), 0)
 }
 
 func Test_getDirFilesFailure(t *testing.T) {
-	_, err := getDirFiles("./examples/myapp2")
+	_, err := getDirFiles("./tests/emptyfoo")
 
 	assert.NotEqual(t, err, nil)
 }
