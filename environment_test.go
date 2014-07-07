@@ -38,3 +38,10 @@ func Test_readEnvironments(t *testing.T) {
 	assert.Equal(t, len(envs[1].Hosts), 0)
 	assert.Equal(t, envs[1].Token, "")
 }
+
+func Test_HostEnabled(t *testing.T) {
+	env := Environment{Name: "foo", Hosts: []string{"foo"}}
+
+	assert.False(t, env.HostEnabled("bar"))
+	assert.True(t, env.HostEnabled("foo"))
+}

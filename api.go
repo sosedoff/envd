@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"net"
 	"strings"
 )
 
@@ -60,9 +61,27 @@ func renderServiceEnvironment(c *gin.Context) {
 
 	environment, err := getEnvironment(serviceName, envName)
 
+	// Respond with 400 if service does not exist
+	// Todo: maybe respond with 404
 	if err != nil {
 		c.String(400, err.Error()+"\n")
 		return
+	}
+
+	// Get remote IP address
+	host, _, err := net.SplitHostPort(c.Req.RemoteAddr)
+
+	if err != nil {
+		c.String(400, err.Error()+"\n")
+		return
+	}
+
+	// Check if environment has allowed hosts
+	if len(environment.Hosts) > 0 {
+		if environment.HostEnabled(host) == false {
+			c.String(401, "Restricted\n")
+			return
+		}
 	}
 
 	c.String(200, environment.ToString()+"\n")

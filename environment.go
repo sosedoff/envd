@@ -13,6 +13,16 @@ type Environment struct {
 	Token string
 }
 
+func (env Environment) HostEnabled(host string) bool {
+	for _, h := range env.Hosts {
+		if h == host {
+			return true
+		}
+	}
+
+	return false
+}
+
 func (env Environment) ToString() string {
 	lines := []string{}
 
