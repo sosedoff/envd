@@ -21,12 +21,20 @@ var options struct {
 var services []Service
 
 func initOptions() {
+	var printVersion bool
+
 	flag.StringVar(&options.Path, "c", "", "Path to config directory")
 	flag.StringVar(&options.Host, "h", "0.0.0.0", "Host to bind to")
 	flag.IntVar(&options.Port, "p", 3050, "Port to listen on")
 	flag.StringVar(&options.Token, "t", "", "Authentication token")
+	flag.BoolVar(&printVersion, "v", false, "Print version")
 
 	flag.Parse()
+
+	if printVersion {
+		fmt.Println(VERSION)
+		os.Exit(0)
+	}
 
 	if options.Path == "" {
 		fmt.Println("Please specify -c option")
