@@ -29,7 +29,8 @@ func initOptions() {
 	flag.Parse()
 
 	if options.Path == "" {
-		options.Path = "./config"
+		fmt.Println("Please specify -c option")
+		os.Exit(1)
 	}
 
 	// Load token from environment variable if not set
