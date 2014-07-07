@@ -76,8 +76,8 @@ func renderServiceEnvironment(c *gin.Context) {
 		return
 	}
 
-	// Check if environment has allowed hosts
-	if len(environment.Hosts) > 0 {
+	// Check if environment has allowed hosts. Localhost is allowed.
+	if host != "::1" && len(environment.Hosts) > 0 {
 		// Reject requests from non-whitelisted hosts
 		if environment.HostEnabled(host) == false {
 			c.String(401, "Restricted\n")
