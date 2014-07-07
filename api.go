@@ -78,8 +78,21 @@ func renderServiceEnvironment(c *gin.Context) {
 
 	// Check if environment has allowed hosts
 	if len(environment.Hosts) > 0 {
+		// Reject requests from non-whitelisted hosts
 		if environment.HostEnabled(host) == false {
 			c.String(401, "Restricted\n")
+			return
+		}
+	}
+
+	// Check if environment has access token
+	// Environment tokens DO NOT work if global access token is set
+	// Global token is set with -t flag or via TOKEN env variable
+	if !options.Auth && environment.Token != "" {
+		token := getClientToken(c)
+
+		if token != environment.Token {
+			c.Abort(401)
 			return
 		}
 	}
