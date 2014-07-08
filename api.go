@@ -22,19 +22,19 @@ func getClientToken(c *gin.Context) string {
 	return token
 }
 
-func RequireAuthToken() gin.HandlerFunc {
-	return func(c *gin.Context) {
+// Returns a list of all available services
+func renderAvailableServices(c *gin.Context) {
+	// Check if authentication is enabled
+	if options.Auth {
 		token := getClientToken(c)
 
 		if token != options.Token {
 			c.Abort(401)
+			return
 		}
 	}
-}
 
-func renderAvailableServices(c *gin.Context) {
 	names := []string{}
-
 	for _, svc := range services {
 		names = append(names, svc.Name)
 	}
@@ -42,10 +42,21 @@ func renderAvailableServices(c *gin.Context) {
 	c.String(200, strings.Join(names, "\n")+"\n")
 }
 
+// Returns a list of all service environments
 func renderServiceEnvironments(c *gin.Context) {
-	serviceName := c.Params.ByName("service")
+	// Check if authentication is enabled
+	if options.Auth {
+		token := getClientToken(c)
 
+		if token != options.Token {
+			c.Abort(401)
+			return
+		}
+	}
+
+	serviceName := c.Params.ByName("service")
 	service, err := getService(serviceName)
+
 	if err != nil {
 		c.String(400, err.Error()+"\n")
 		return
@@ -85,14 +96,18 @@ func renderServiceEnvironment(c *gin.Context) {
 		}
 	}
 
-	// Check if environment has access token
-	// Environment tokens DO NOT work if global access token is set
-	// Global token is set with -t flag or via TOKEN env variable
-	if !options.Auth && environment.Token != "" {
-		token := getClientToken(c)
+	// Fetch token from url param or from the header
+	token := getClientToken(c)
 
+	// Validate environment token if its set, otherwise check agains global token
+	if environment.Token != "" {
 		if token != environment.Token {
-			c.Abort(401)
+			c.String(401, "Restricted\n")
+			return
+		}
+	} else {
+		if options.Auth && token != options.Token {
+			c.String(401, "Restricted\n")
 			return
 		}
 	}
@@ -101,20 +116,16 @@ func renderServiceEnvironment(c *gin.Context) {
 }
 
 func startServer() {
+	host := fmt.Sprintf("%s:%d", options.Host, options.Port)
 	api := gin.Default()
-
-	if options.Auth {
-		fmt.Println("authentication enabled")
-		api.Use(RequireAuthToken())
-	} else {
-		fmt.Println("authentication disabled")
-	}
 
 	api.GET("/", renderAvailableServices)
 	api.GET("/:service", renderServiceEnvironments)
 	api.GET("/:service/:env", renderServiceEnvironment)
 
-	host := fmt.Sprintf("%s:%d", options.Host, options.Port)
+	if options.Auth {
+		fmt.Println("authentication enabled")
+	}
 
 	fmt.Println("starting server on", host)
 	api.Run(host)
