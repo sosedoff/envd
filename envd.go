@@ -60,6 +60,7 @@ func reloadServices() {
 	newServices, err := readServices(options.Path)
 
 	if err != nil {
+		fmt.Println("Failed to reload services:", err.Error())
 		return
 	}
 
