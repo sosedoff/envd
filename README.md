@@ -91,12 +91,6 @@ Fetch service environment variables:
 GET /:service/:environment
 ```
 
-Reload configuration files:
-
-```
-POST /reload
-```
-
 ## Build
 
 To compile application from source execute:
