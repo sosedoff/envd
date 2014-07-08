@@ -49,11 +49,7 @@ func initOptions() {
 	}
 
 	// Do not require authentication if token is not set
-	if options.Token == "" {
-		options.Auth = false
-	} else {
-		options.Auth = true
-	}
+	options.Auth = options.Token != ""
 }
 
 func reloadServices() {
