@@ -100,20 +100,6 @@ func renderServiceEnvironment(c *gin.Context) {
 	c.String(200, environment.ToString()+"\n")
 }
 
-func renderReloadServices(c *gin.Context) {
-	new_services, err := readServices(options.Path)
-
-	if err != nil {
-		c.String(400, err.Error()+"\n")
-		return
-	}
-
-	// Replace current configuration
-	services = new_services
-
-	c.String(200, "OK\n")
-}
-
 func startServer() {
 	api := gin.Default()
 
