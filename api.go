@@ -127,7 +127,6 @@ func startServer() {
 	api.GET("/", renderAvailableServices)
 	api.GET("/:service", renderServiceEnvironments)
 	api.GET("/:service/:env", renderServiceEnvironment)
-	api.POST("/reload", renderReloadServices)
 
 	host := fmt.Sprintf("%s:%d", options.Host, options.Port)
 
