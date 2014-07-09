@@ -114,6 +114,11 @@ Execute test suite with command:
 make test
 ```
 
+## Deployment
+
+You can use [supervisord](http://supervisord.org/) for process control management.
+See `templates` directory for example configs.
+
 ## License
 
 The MIT License (MIT)
