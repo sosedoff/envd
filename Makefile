@@ -1,3 +1,5 @@
+default: test
+
 deps:
 	go get
 	go get github.com/stretchr/testify/assert
