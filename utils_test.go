@@ -9,6 +9,7 @@ func Test_isJunkFile(t *testing.T) {
 	assert.Equal(t, isJunkFile(".DS_Store"), true)
 	assert.Equal(t, isJunkFile(".gitkeep"), true)
 	assert.Equal(t, isJunkFile(".gitignore"), true)
+	assert.Equal(t, isJunkFile(".git"), true)
 	assert.Equal(t, isJunkFile("file"), false)
 }
 

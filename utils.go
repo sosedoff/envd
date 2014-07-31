@@ -9,6 +9,7 @@ var skipFiles = [...]string{
 	".DS_Store",
 	".gitkeep",
 	".gitignore",
+	".git",
 }
 
 func fileExists(path string) bool {
