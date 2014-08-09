@@ -2,3 +2,5 @@
 config/
 envd
 envd_*
+Godeps/*
+!Godeps/Godeps.json
