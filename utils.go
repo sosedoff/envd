@@ -18,13 +18,7 @@ func fileExists(path string) bool {
 }
 
 func isJunkFile(name string) bool {
-	for _, file := range skipFiles {
-		if file == name {
-			return true
-		}
-	}
-
-	return false
+	return string(name[0]) == "."
 }
 
 func getDirs(path string) ([]string, error) {
