@@ -31,7 +31,7 @@ func getDirs(path string) ([]string, error) {
 	dirs := []string{}
 
 	for _, file := range files {
-		if file.IsDir() {
+		if file.IsDir() && !isJunkFile(file.Name()) {
 			dirs = append(dirs, file.Name())
 		}
 	}
