@@ -45,7 +45,7 @@ func initOptions() {
 
 	// Load token from environment variable if not set
 	if options.Token == "" {
-		options.Token = os.Getenv("TOKEN")
+		options.Token = os.Getenv("ENVD_TOKEN")
 	}
 
 	// Do not require authentication if token is not set
