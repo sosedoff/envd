@@ -10,12 +10,12 @@ import (
 // Returns client authentication token from header or url params
 func getClientToken(c *gin.Context) string {
 	// Try fetching auth token from headers first
-	token := c.Req.Header.Get("Token")
+	token := c.Request.Header.Get("Token")
 
 	// Try to fetch from url param if blank
 	if token == "" {
-		if len(c.Req.URL.Query()["token"]) > 0 {
-			token = c.Req.URL.Query()["token"][0]
+		if len(c.Request.URL.Query()["token"]) > 0 {
+			token = c.Request.URL.Query()["token"][0]
 		}
 	}
 
@@ -80,7 +80,7 @@ func renderServiceEnvironment(c *gin.Context) {
 	}
 
 	// Get remote IP address
-	host, _, err := net.SplitHostPort(c.Req.RemoteAddr)
+	host, _, err := net.SplitHostPort(c.Request.RemoteAddr)
 
 	if err != nil {
 		c.String(400, err.Error()+"\n")
