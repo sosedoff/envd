@@ -29,7 +29,8 @@ func renderAvailableServices(c *gin.Context) {
 		token := getClientToken(c)
 
 		if token != options.Token {
-			c.Abort(401)
+			c.String(401, "Invalid token")
+			c.Abort()
 			return
 		}
 	}
@@ -49,7 +50,8 @@ func renderServiceEnvironments(c *gin.Context) {
 		token := getClientToken(c)
 
 		if token != options.Token {
-			c.Abort(401)
+			c.String(401, "Invalid token")
+			c.Abort()
 			return
 		}
 	}

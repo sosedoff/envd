@@ -4,8 +4,8 @@
 	"Deps": [
 		{
 			"ImportPath": "github.com/gin-gonic/gin",
-			"Comment": "v0.3-3-gc3abaf9",
-			"Rev": "c3abaf9afcd167475951249d5a406ba10b24a1d9"
+			"Comment": "v0.5",
+			"Rev": "50e7e427300a7eeeb299a4cd5bc1ebfa04d48528"
 		},
 		{
 			"ImportPath": "github.com/julienschmidt/httprouter",
