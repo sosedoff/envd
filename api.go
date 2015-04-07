@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
-	"github.com/gin-gonic/gin"
 	"net"
 	"strings"
+
+	"github.com/gin-gonic/gin"
 )
 
 // Returns client authentication token from header or url params
